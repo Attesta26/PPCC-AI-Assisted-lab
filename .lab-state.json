@@ -6,5 +6,12 @@
   "publisherPrefix": "lab",
   "repo": "Attesta26/PPCC-AI-Assisted-lab",
   "mainRulesetId": 25828834,
-  "mainRulesetName": "lab-main-protection"
+  "mainRulesetName": "lab-main-protection",
+  "devEnvUrl": "https://wm-dev-2355.crm.dynamics.com",
+  "devEnvId": "286b0af3-995c-eb37-a75d-2094d6bda404",
+  "devOrgId": "6a7c3787-98d0-f111-be87-000d3a5cb43a",
+  "devProfile": "dev",
+  "packageDeployerScaffolded": true,
+  "dataModelScaffolded": true,
+  "columnsScaffolded": true
 }
