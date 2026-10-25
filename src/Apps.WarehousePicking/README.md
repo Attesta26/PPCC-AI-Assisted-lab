@@ -15,7 +15,33 @@ starter. It ships through `Solutions.UI` alongside the manager's model-driven ap
 Desktop lists use TALXIS Grid; phone-sized screens show the same records as cards
 with bottom navigation. Forms and lookups use TALXIS base controls on Fluent UI.
 An item's existing quantity is read-only: stock movements go through transactions.
-Barcode scanning and stock-count screens are intentionally not included in CP09.
+Stock-count screens are not included.
+
+## Barcode lookup
+
+On an item's detail, select **Scan Barcode** (or **Rescan Barcode** for a linked
+item). The dialog tries the back camera with `@zxing/browser`; manual barcode input
+and **Look Up** remain available when the camera is absent or permission is denied.
+Both paths use the same connector operation. A new lookup replaces the old preview,
+and late responses cannot link a product to a different typed barcode.
+
+The preview shows the catalog name, brand, quantity and image. **Link to Item**
+finds a Product by EAN (or creates it), saves the Item's Product lookup, then
+uploads the image through the generated Product File service. These are separate
+operations: an image error leaves the Product and link intact and displays a
+persistent warning. There is no EAN alternate key, so this is find-then-create,
+not an atomic concurrent upsert.
+
+The item detail displays its linked Product and stored image. For catalog records
+without a stored File, the image is loaded through the connector. External image
+URLs are never loaded directly by the browser; verified PNG/JPEG bytes are rendered
+as CSP-safe data URLs. No stock comparisons or direct Dataverse/API calls were
+added.
+
+Neither warehouse role has Product privileges, as specified. Live Product reads,
+creates, links and File uploads require a user with suitable existing privileges
+(the lab's System Administrator acceptance-test account); the app does not elevate
+access.
 
 ## Data and validation
 
@@ -68,6 +94,12 @@ npm test
 npm run lint
 npm run build
 ```
+
+The Node tests cover generated SDK dispatch, create/reuse/link/upload ordering,
+partial image failure, exact connector errors, camera/manual dialog paths, stale
+lookup responses and camera cleanup. They mock platform services and camera
+hardware; browser permissions, CSP and a live end-to-end lookup still need an
+authenticated app session after deployment.
 
 From the repository root, `dotnet build WarehouseManagement.slnx` builds and packages
 the app with the other projects. Local Power Apps data access requires the user's
