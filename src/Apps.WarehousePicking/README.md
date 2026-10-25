@@ -57,7 +57,9 @@ template does not generate those methods.
 
 The deployed Open Food Facts connector is bound to a per-environment connection
 using `pa connection create` and `pa app add data-source`. Both commands need
-`--environment-id` while this app's environment ID is unset. Discover the connector
+`--environment-id` when binding to a different environment. CP12 sets this app's
+`environmentId` to the Dev environment returned by `txc env list`, enabling the
+Power Apps Local Play link from `npm run dev`. Discover the connector
 ID with `pa connector list --search "Open Food Facts" --json`; its API name is
 different from its Dataverse schema name.
 
