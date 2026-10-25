@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries>
+  <savedquery>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{58db9689-199b-48ed-911e-698228ed4523}</savedqueryid>
+    <queryapi>
+    </queryapi>
+    <layoutxml>
+      <grid name="resultset" jump="lab_name" select="1" preview="0" icon="1">
+        <row name="result" id="lab_warehousetransactionid">
+          <cell name="lab_name" width="125" />
+          <cell name="lab_transactiontype" width="125" />
+          <cell name="lab_itemid" width="125" />
+          <cell name="lab_quantity" width="125" />
+          <cell name="lab_transactiondate" width="125" />
+          <cell name="lab_totalvalue" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="lab_warehousetransaction">
+          <attribute name="lab_warehousetransactionid" />
+          <attribute name="lab_name" />
+          <order attribute="lab_name" descending="false" />
+          <attribute name="lab_transactiontype" />
+          <attribute name="lab_itemid" />
+          <attribute name="lab_quantity" />
+          <attribute name="lab_transactiondate" />
+          <attribute name="lab_totalvalue" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Warehouse Transactions" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>
