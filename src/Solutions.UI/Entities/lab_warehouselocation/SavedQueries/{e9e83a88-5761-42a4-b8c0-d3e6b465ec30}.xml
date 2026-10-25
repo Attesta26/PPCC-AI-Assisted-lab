@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries>
+  <savedquery>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{e9e83a88-5761-42a4-b8c0-d3e6b465ec30}</savedqueryid>
+    <queryapi>
+    </queryapi>
+    <layoutxml>
+      <grid name="resultset" jump="lab_name" select="1" preview="0" icon="1">
+        <row name="result" id="lab_warehouselocationid">
+          <cell name="lab_name" width="125" />
+          <cell name="lab_address" width="125" />
+          <cell name="lab_capacity" width="125" />
+          <cell name="lab_isactive" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="lab_warehouselocation">
+          <attribute name="lab_warehouselocationid" />
+          <attribute name="lab_name" />
+          <order attribute="lab_name" descending="false" />
+          <attribute name="lab_address" />
+          <attribute name="lab_capacity" />
+          <attribute name="lab_isactive" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Warehouse Locations" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

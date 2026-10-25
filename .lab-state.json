@@ -21,5 +21,13 @@
   "testOrgId": "e48dcefd-99d0-f111-be88-7ced8d714613",
   "testProfile": "test",
   "appId": "171a48f6-8ca4-4f87-9add-7482a52fb9e7",
-  "securityScaffolded": true
+  "securityScaffolded": true,
+  "uiSolutionScaffolded": true,
+  "sitemapScaffolded": true,
+  "formsScaffolded": true,
+  "viewsSubgridsScaffolded": true,
+  "codeAppScaffolded": true,
+  "formScriptsScaffolded": true,
+  "ribbonScaffolded": true,
+  "gridControlScaffolded": true
 }
