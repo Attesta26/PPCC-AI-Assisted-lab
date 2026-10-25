@@ -3,5 +3,8 @@
   "randomIdentifier": 2355,
   "slnxName": "WarehouseManagement",
   "publisherName": "TALXISLab",
-  "publisherPrefix": "lab"
+  "publisherPrefix": "lab",
+  "repo": "Attesta26/PPCC-AI-Assisted-lab",
+  "mainRulesetId": 25828834,
+  "mainRulesetName": "lab-main-protection"
 }
