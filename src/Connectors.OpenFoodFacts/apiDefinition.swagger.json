@@ -1,0 +1,94 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Open Food Facts",
+    "description": "Look up product data by barcode from the Open Food Facts public database.",
+    "version": "1.0"
+  },
+  "host": "world.openfoodfacts.org",
+  "basePath": "/api/v2",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": ["application/json"],
+  "paths": {
+    "/product/{barcode}.json": {
+      "get": {
+        "summary": "Get product by barcode",
+        "operationId": "GetProductByBarcode",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "name": "barcode",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Barcode"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product found",
+            "schema": { "$ref": "#/definitions/Product" }
+          },
+          "404": {
+            "description": "No product found for this barcode",
+            "schema": { "$ref": "#/definitions/Error" }
+          }
+        }
+      }
+    },
+    "/product-image": {
+      "get": {
+        "summary": "Get product image",
+        "operationId": "GetProductImage",
+        "x-ms-visibility": "important",
+        "parameters": [
+          {
+            "name": "imageUrl",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Image URL"
+          }
+        ],
+        "produces": ["image/jpeg", "image/png"],
+        "responses": {
+          "200": {
+            "description": "Image bytes",
+            "schema": { "type": "file" }
+          },
+          "400": {
+            "description": "Missing or invalid image URL",
+            "schema": { "$ref": "#/definitions/Error" }
+          }
+        },
+        "x-ms-media-kind": "image"
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "type": "object",
+      "properties": {
+        "ean": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "quantity": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "message": { "type": "string" }
+      }
+    }
+  },
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {},
+  "security": [],
+  "tags": []
+}
