@@ -23,6 +23,8 @@ import { useStyles } from "@/styles/WarehouseItemDetail.styles";
 import { errorText } from "@/utils/ServicePayload";
 import { createTransaction, getItem, listLocations, listTransactions, updateItem } from "@/utils/WarehouseData";
 import { toNumber } from "@/utils/RecordValues";
+import { BarcodeScanDialog } from "@/components/BarcodeScanDialog";
+import { LinkedProduct } from "@/components/LinkedProduct";
 
 const transactionColumns: IColumn[] = [
   { name: "lab_name", displayName: "Name", dataType: "SingleLine.Text", isPrimary: true, visualSizeFactor: 240 },
@@ -181,7 +183,11 @@ export default function WarehouseItemDetailPage() {
             columnCount={3}
             title={item.lab_name ?? ""}
             onBack={() => navigate("/items")}
-            headerExtras={<Button appearance="primary" onClick={() => setDialogOpen(true)}>New Transaction</Button>}
+            headerExtras={<div className={styles.inline}>
+              <BarcodeScanDialog itemId={item.lab_warehouseitemid} currentProductId={item._lab_productid_value}
+                onLinked={async () => { await queryClient.invalidateQueries(); }} />
+              <Button appearance="primary" onClick={() => setDialogOpen(true)}>New Transaction</Button>
+            </div>}
             lookupRecords={{ lab_locationid: locationRecords }}
             onSave={(values) => updateItemMutation.mutateAsync(values)}
             tabs={[
@@ -205,6 +211,7 @@ export default function WarehouseItemDetailPage() {
           />
         )}
       </div>
+      {item._lab_productid_value && <LinkedProduct productId={item._lab_productid_value} />}
 
       <RecordFormDialog
         open={dialogOpen}

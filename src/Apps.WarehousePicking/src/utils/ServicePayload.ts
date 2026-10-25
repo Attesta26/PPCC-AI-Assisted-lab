@@ -13,6 +13,9 @@ export function errorText(error: unknown): string {
 function serverMessage(text: string): string {
   try {
     const body: unknown = JSON.parse(text);
+    if (body && typeof body === "object" && "message" in body && typeof body.message === "string") {
+      return body.message;
+    }
     if (body && typeof body === "object" && "error" in body) {
       const error = body.error;
       if (error && typeof error === "object" && "message" in error && typeof error.message === "string") {
