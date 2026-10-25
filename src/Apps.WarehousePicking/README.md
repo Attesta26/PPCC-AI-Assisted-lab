@@ -19,9 +19,33 @@ Barcode scanning and stock-count screens are intentionally not included in CP09.
 
 ## Data and validation
 
-The three generated services in `src/generated/services` are the only Dataverse
-data-access layer. Regenerate them with `pp-app-code-data` from
-`../Solutions.DataModel`; do not edit generated files.
+The four generated Dataverse services in `src/generated/services` are the only
+Dataverse data-access layer. Product and the optional Item Product lookup are
+registered in `power.config.json`.
+
+Generate table models with `pp-app-code-data` from `../Solutions.DataModel`.
+For Product, follow this with `pa app add data-source --connector dataverse
+--table lab_product --environment-id <Dev environment ID>` to generate the
+File-column upload/download methods from the deployed schema. The offline
+template does not generate those methods.
+
+The deployed Open Food Facts connector is bound to a per-environment connection
+using `pa connection create` and `pa app add data-source`. Both commands need
+`--environment-id` while this app's environment ID is unset. Discover the connector
+ID with `pa connector list --search "Open Food Facts" --json`; its API name is
+different from its Dataverse schema name.
+
+The generated `OpenFoodFactsService` exposes `GetProductByBarcode` and
+`GetProductImage`. After regeneration, retain the spec's `OpenFoodFacts` alias in
+the service, `dataSourcesInfo.ts`, and the matching connection reference's
+`dataSources` list. `pa` otherwise uses an environment-specific escaped name.
+Do not change the generated operation paths or remove their connection ID parameter.
+If the offline Item refresh leaves `capitalizedentitylogicalnameexamplesService.ts`,
+finish its rename to `Lab_warehouseitemsService.ts` and remove its duplicate barrel
+export; it is a template rename collision, not a second service.
+Before committing a generated connector schema, remove temporary signed download
+URLs (`apiDefinitions` and `scriptDefinitionUrl`) and creator metadata. They are
+not required by the app and must not be shipped in source control.
 
 `src/utils/WarehouseData.ts` handles pagination, create payloads and item updates.
 It omits ownership/state fields that Dataverse supplies automatically, despite the
