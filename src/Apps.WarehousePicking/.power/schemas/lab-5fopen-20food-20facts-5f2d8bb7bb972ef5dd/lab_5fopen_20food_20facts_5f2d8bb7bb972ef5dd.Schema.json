@@ -1,0 +1,191 @@
+{
+  "name": "shared_lab-5fopen-20food-20facts-5f2d8bb7bb972ef5dd",
+  "id": "/providers/Microsoft.PowerApps/apis/shared_lab-5fopen-20food-20facts-5f2d8bb7bb972ef5dd",
+  "type": "Microsoft.PowerApps/apis",
+  "properties": {
+    "xrmConnectorId": "796f58f9-aeb5-ba33-a08b-1dfba0d9062f",
+    "displayName": "Open Food Facts",
+    "iconUri": "https://defaulticons.powerapps.com/defaulticons/api-dedicated.png",
+    "iconBrandColor": "#007ee5",
+    "contact": {},
+    "license": {},
+    "apiEnvironment": "Shared",
+    "isCustomApi": true,
+    "blobUrisAreProxied": false,
+    "connectionParameters": {},
+    "swagger": {
+      "swagger": "2.0",
+      "info": {
+        "title": "Open Food Facts",
+        "description": "Look up product data by barcode from the Open Food Facts public database.",
+        "version": "1.0"
+      },
+      "host": "286b0af3995ceb37a75d2094d6bda4.04.environment.api.powerplatform.com",
+      "basePath": "/connectors/runtime/invoke/scalegroups/usa002/shards/18/apis/lab-5fopen-20food-20facts-5f2d8bb7bb972ef5dd/connections/",
+      "schemes": [
+        "https"
+      ],
+      "consumes": [],
+      "produces": [
+        "application/json"
+      ],
+      "paths": {
+        "/{connectionId}/product/{barcode}.json": {
+          "get": {
+            "summary": "Get product by barcode",
+            "operationId": "GetProductByBarcode",
+            "x-ms-visibility": "important",
+            "parameters": [
+              {
+                "name": "connectionId",
+                "in": "path",
+                "required": true,
+                "x-ms-visibility": "internal",
+                "type": "string"
+              },
+              {
+                "name": "barcode",
+                "in": "path",
+                "required": true,
+                "type": "string",
+                "x-ms-summary": "Barcode"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Product found",
+                "schema": {
+                  "$ref": "#/definitions/Product"
+                }
+              },
+              "404": {
+                "description": "No product found for this barcode",
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            }
+          }
+        },
+        "/{connectionId}/product-image": {
+          "get": {
+            "summary": "Get product image",
+            "operationId": "GetProductImage",
+            "x-ms-visibility": "important",
+            "parameters": [
+              {
+                "name": "connectionId",
+                "in": "path",
+                "required": true,
+                "x-ms-visibility": "internal",
+                "type": "string"
+              },
+              {
+                "name": "imageUrl",
+                "in": "query",
+                "required": true,
+                "type": "string",
+                "x-ms-summary": "Image URL"
+              }
+            ],
+            "produces": [
+              "image/jpeg",
+              "image/png"
+            ],
+            "responses": {
+              "200": {
+                "description": "Image bytes",
+                "schema": {
+                  "type": "file"
+                }
+              },
+              "400": {
+                "description": "Missing or invalid image URL",
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            },
+            "x-ms-media-kind": "image"
+          }
+        }
+      },
+      "definitions": {
+        "Product": {
+          "type": "object",
+          "properties": {
+            "ean": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "brand": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "string"
+            },
+            "imageUrl": {
+              "type": "string"
+            }
+          }
+        },
+        "Error": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "parameters": {},
+      "responses": {},
+      "securityDefinitions": {},
+      "security": [],
+      "tags": []
+    },
+    "runtimeUrls": [
+      "https://286b0af3995ceb37a75d2094d6bda4.04.environment.api.powerplatform.com/connectors/runtime/invoke/scalegroups/usa002/shards/18/apis/lab-5fopen-20food-20facts-5f2d8bb7bb972ef5dd/connections/"
+    ],
+    "primaryRuntimeUrl": "https://286b0af3995ceb37a75d2094d6bda4.04.environment.api.powerplatform.com/connectors/runtime/invoke/scalegroups/usa002/shards/18/apis/lab-5fopen-20food-20facts-5f2d8bb7bb972ef5dd/connections/",
+    "doNotUseApiHubNetRuntimeUrl": "https://286b0af3-995c-eb37-a75d-2094d6bda404.18.custom.usa002.azure-apihub.net/apim/lab-5fopen-20food-20facts-5f2d8bb7bb972ef5dd",
+    "metadata": {
+      "source": "powerapps-user-defined",
+      "brandColor": "#007ee5",
+      "contact": {},
+      "license": {},
+      "publisherUrl": null,
+      "serviceUrl": null,
+      "documentationUrl": null,
+      "environmentName": "286b0af3-995c-eb37-a75d-2094d6bda404",
+      "xrmConnectorId": "796f58f9-aeb5-ba33-a08b-1dfba0d9062f",
+      "almMode": "Solution",
+      "parameters": {},
+      "useNewApimVersion": "True",
+      "allowSharing": false
+    },
+    "capabilities": [
+      "actions"
+    ],
+    "description": "Look up product data by barcode from the Open Food Facts public database.",
+    "policyTemplateInstances": [],
+    "backendService": {
+      "serviceUrl": "https://world.openfoodfacts.org/api/v2"
+    },
+    "createdTime": "2026-10-25T21:34:08.5070927Z",
+    "changedTime": "2026-10-25T21:34:08.5070927Z",
+    "environment": {
+      "id": "/providers/Microsoft.PowerApps/environments/286b0af3-995c-eb37-a75d-2094d6bda404",
+      "name": "286b0af3-995c-eb37-a75d-2094d6bda404"
+    },
+    "tier": "Standard",
+    "publisher": "User 119",
+    "almMode": "Solution",
+    "scriptOperations": [],
+    "parameters": {},
+    "rateLimit": 0,
+    "apiVersion": "None"
+  }
+}
